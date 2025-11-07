@@ -71,3 +71,4 @@ export default defineConfig([
   },
 ])
 ```
+# 8-oy-6-dars
