@@ -1,0 +1,19 @@
+import useFetch from "@/hooks/useFetch"
+import {type FetchType } from "@/model/model"
+import Loading from "@/components/Loading";
+
+interface Data {
+    id: number;
+    title: string; 
+    text: string;
+
+}
+function Document() {
+    const {data, loading} = useFetch<FetchType<Data>>("documentation")
+    if(loading) {
+        return <Loading/>
+    }
+  return <div className="py10"></div>
+}
+
+export default Document

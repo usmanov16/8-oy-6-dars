@@ -1,0 +1,15 @@
+import useFetch from "@/hooks/useFetch"
+
+interface FetchType {
+    limit: number;
+    total: number;
+    skip: 
+}
+function Document() {
+    const {data, error, loading} = useFetch("documentation")
+  return (
+    <div>Document</div>
+  )
+}
+
+export default Document

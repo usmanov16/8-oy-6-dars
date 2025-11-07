@@ -1,0 +1,49 @@
+function GameField() {
+    const { id } = useParams();
+  
+    // 👉 пока id нет — возвращаем загрузку или ничего
+    if (!id) {
+      return <Loading />;
+    }
+  
+    const { data, loading } = useFetch<Data>(`questions/${id}`);
+    const [activeQuestion, setActiveQuestion] = useState(0);
+  
+    if (loading) {
+      return <Loading />;
+    }
+  
+    return (
+      <div className="py-10">
+        <h2 className="text-2xl font-bold text-center mb-10">
+          {data && data.questions[0].questions}
+        </h2>
+  
+        <div className="mb-15 flex gap-5 items-center justify-center">
+          {data &&
+            data.questions[activeQuestion].word
+              .toUpperCase()
+              .split("")
+              .map((letter, i) => (
+                <span
+                  className="border border-gray-400 py-4 px-4"
+                  key={i}
+                ></span>
+              ))}
+        </div>
+  
+        <div className="flex flex-col gap-6 items-center">
+          {keyboard.map((str) => (
+            <div className="flex items-center gap-4" key={str}>
+              {str.toUpperCase().split("").map((key) => (
+                <Button key={key} className="text-xl font-bold">
+                  {key}
+                </Button>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+  

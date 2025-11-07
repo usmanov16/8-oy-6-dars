@@ -1,0 +1,23 @@
+import Loading from "@/components/Loading";
+import useFetch from "@/hooks/useFetch"
+import type { FetchType } from "@/model/model"
+
+interface Data {
+    id: number;
+    name: string;
+}
+
+function Categories() {
+    const {data, loading} = useFetch<FetchType<Data>>("categories")
+
+    if(loading) {
+        return <Loading/>
+    }
+  return (
+    <div>
+        <div className="container"></div>
+    </div>
+  )
+}
+
+export default Categories

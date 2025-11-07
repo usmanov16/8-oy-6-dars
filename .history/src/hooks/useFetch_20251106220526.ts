@@ -1,0 +1,34 @@
+import { BaseUrl } from "@/api/url";
+import { useEffect, useState } from "react";
+
+type Param = "documentation" | "questions" | "categories";
+
+function useFetch<T>(param: Param) {
+  const [data, setData] = useState<T | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true); // ✅ изначально true
+
+  async function fetchData() {
+    setLoading(true); // ✅ при каждом вызове запроса ставим true
+    try {
+      const response = await fetch(BaseUrl + param);
+      if (!response.ok) {
+        throw new Error("Xatolik");
+      }
+      const data = await response.json();
+      setData(data);
+    } catch (error: any) {
+      setError(error.message);
+    } finally {
+      setLoading(false); 
+    }
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, [param]); 
+
+  return { data, error, loading };
+}
+
+export default useFetch;
