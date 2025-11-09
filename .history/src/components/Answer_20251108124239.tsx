@@ -1,0 +1,29 @@
+import { data } from "react-router-dom";
+
+
+function Answer() {
+    const currentQuestion = <data value="" className="questions"></data>[activeQuestion];
+
+  return (
+    <div className="mb-15 flex flex-wrap gap-x-5 gap-y-10 items-center justify-center">
+    {currentQuestion?.answer
+      ?.toUpperCase()
+      ?.split(" ")
+      .map((word, i) => (
+        <div className="flex gap-2" key={i}>
+          {word.split("").map((_, j) => (
+            <span
+              className="w-10 h-10 flex text-xl font-bold items-center justify-center border border-gray-400 rounded"
+              key={`${i}-${j}`}
+            >
+              {letters.includes(letter) && letter}
+              
+            </span>
+          ))}
+        </div>
+      ))}
+  </div>
+  )
+}
+
+export default Answer
