@@ -116,7 +116,7 @@ function GameField() {
               <Button variant="outline" onClick={handleRestart}>
                 Play again
               </Button>
-              <Button onClick={handleExit}>Back</Button>
+              <Button onClick={handleExit}></Button>
             </div>
           </div>
         </div>
