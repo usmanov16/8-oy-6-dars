@@ -23,16 +23,16 @@ function Categories() {
     }
 
     return (
-        <div className="py-10">
+        <div className="py-10 bg-gray-50 min-h-screen">
             <div className="container mx-auto">
                 <div className="mb-10 flex items-center justify-between">
                     <Button 
                         onClick={()=> navigate("/")}
-                        className="p-3 shadow-md hover:shadow-lg transition duration-200 rounded-lg"
+                        className="p-3 bg-white shadow-md hover:shadow-lg transition duration-200 rounded-lg"
                     >
                         <Undo2 />
                     </Button>
-                    <h2 className="text-3xl font-bold">{/* цвет оставлен стандартный */}Pick a Category</h2>
+                    <h2 className="text-3xl font-bold text-gray-800">Pick a Category</h2>
                     <span></span>
                 </div>
 
@@ -41,8 +41,7 @@ function Categories() {
                         <li key={category.id}>
                             <Button
                                 onClick={()=> handleClick(category.id)}
-                                className="w-full py-5 text-lg font-semibold transition-all duration-200 shadow-md hover:shadow-lg rounded-xl"
-                                size="xlg"
+                                className="w-full text-white bg-purple hover:purple shadow-md hover:shadow-lg rounded-xl py-5 text-lg font-semibold transition-all duration-200"
                             >
                                 {category.name.toUpperCase()}
                             </Button>
