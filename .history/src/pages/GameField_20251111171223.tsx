@@ -28,7 +28,7 @@ function GameField() {
   const [lives, setLives] = useState<number>(3);
   const [showModal, setShowModal] = useState(false);
 
-  
+  // Проверяем правильность ответа
   useEffect(() => {
     if (!data || !data.questions?.[activeQuestion]) return;
 
@@ -37,7 +37,7 @@ function GameField() {
       .split("");
 
     if (currentAnswer.every((l) => letters.includes(l) || l === " ")) {
-      toast.success("Correct");
+      toast.success("To‘g‘ri topdingiz!");
       const timeout = setTimeout(() => {
         setLetters("");
         setActiveQuestion((prev) => prev + 1);

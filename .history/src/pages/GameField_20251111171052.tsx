@@ -28,7 +28,7 @@ function GameField() {
   const [lives, setLives] = useState<number>(3);
   const [showModal, setShowModal] = useState(false);
 
-  
+  // Проверяем правильность ответа
   useEffect(() => {
     if (!data || !data.questions?.[activeQuestion]) return;
 
@@ -37,7 +37,7 @@ function GameField() {
       .split("");
 
     if (currentAnswer.every((l) => letters.includes(l) || l === " ")) {
-      toast.success("Correct");
+      toast.success("To‘g‘ri topdingiz!");
       const timeout = setTimeout(() => {
         setLetters("");
         setActiveQuestion((prev) => prev + 1);
@@ -46,7 +46,7 @@ function GameField() {
     }
   }, [letters, data, activeQuestion]);
 
-  
+  // Проверяем, правильная ли буква при каждом изменении
   useEffect(() => {
     if (!data || !data.questions?.[activeQuestion]) return;
 
@@ -54,7 +54,7 @@ function GameField() {
     const currentAnswer = data.questions[activeQuestion].answer.toUpperCase();
 
     if (lastLetter && !currentAnswer.includes(lastLetter)) {
-      toast.error("Wrong letter");
+      toast.error("Неправильная буква!");
       setLives((prev) => {
         const newLives = prev - 1;
         if (newLives <= 0) {
@@ -80,14 +80,14 @@ function GameField() {
   if (!data || !data.questions?.length)
     return (
       <p className="text-center text-gray-500">
-        No film
+        Фильм не найден или вопросы отсутствуют.
       </p>
     );
 
   if (activeQuestion >= data.questions.length)
     return (
       <p className="text-center text-green-600 font-bold text-2xl py-20">
-        Congratulations you win the game
+        🎉 Все вопросы завершены!
       </p>
     );
 
@@ -95,7 +95,7 @@ function GameField() {
 
   return (
     <div className="py-10 relative">
-      
+      {/* ❤️ Сердечки */}
       <div className="flex justify-center mb-6 gap-2">
         {[...Array(3)].map((_, i) => (
           <Heart
@@ -106,15 +106,15 @@ function GameField() {
         ))}
       </div>
 
-      
+      {/* Модалка "Игра окончена" */}
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/60 z-50">
           <div className="bg-white rounded-2xl shadow-lg p-8 text-center w-80">
-            <h2 className="text-2xl font-bold text-red-600 mb-4">End</h2>
-            <p className="text-gray-600 mb-6">You have lost all your lives</p>
+            <h2 className="text-2xl font-bold text-red-600 mb-4">Игра окончена</h2>
+            <p className="text-gray-600 mb-6">Вы потеряли все жизни 💔</p>
             <div className="flex justify-center gap-4">
               <Button variant="outline" onClick={handleRestart}>
-                Play again
+                
               </Button>
               <Button onClick={handleExit}>Вернуться</Button>
             </div>

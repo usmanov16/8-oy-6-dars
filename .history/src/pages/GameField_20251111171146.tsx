@@ -28,7 +28,7 @@ function GameField() {
   const [lives, setLives] = useState<number>(3);
   const [showModal, setShowModal] = useState(false);
 
-  
+  // Проверяем правильность ответа
   useEffect(() => {
     if (!data || !data.questions?.[activeQuestion]) return;
 
@@ -37,7 +37,7 @@ function GameField() {
       .split("");
 
     if (currentAnswer.every((l) => letters.includes(l) || l === " ")) {
-      toast.success("Correct");
+      toast.success("To‘g‘ri topdingiz!");
       const timeout = setTimeout(() => {
         setLetters("");
         setActiveQuestion((prev) => prev + 1);
@@ -46,7 +46,7 @@ function GameField() {
     }
   }, [letters, data, activeQuestion]);
 
-  
+  // Проверяем, правильная ли буква при каждом изменении
   useEffect(() => {
     if (!data || !data.questions?.[activeQuestion]) return;
 
@@ -54,7 +54,7 @@ function GameField() {
     const currentAnswer = data.questions[activeQuestion].answer.toUpperCase();
 
     if (lastLetter && !currentAnswer.includes(lastLetter)) {
-      toast.error("Wrong letter");
+      toast.error("Неправильная буква!");
       setLives((prev) => {
         const newLives = prev - 1;
         if (newLives <= 0) {
@@ -80,14 +80,14 @@ function GameField() {
   if (!data || !data.questions?.length)
     return (
       <p className="text-center text-gray-500">
-        No film
+        Фильм не найден или вопросы отсутствуют.
       </p>
     );
 
   if (activeQuestion >= data.questions.length)
     return (
       <p className="text-center text-green-600 font-bold text-2xl py-20">
-        Congratulations you win the game
+        🎉 Все вопросы завершены!
       </p>
     );
 
